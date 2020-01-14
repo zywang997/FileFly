@@ -1,25 +1,32 @@
 # FileFly
-Web assignment
+北京大学《互联网软件开发技术与实践》课程期末大作业
 
 
 ## 简介
-使用python的Flask框架开发的一个校园分享云盘系统，存储使用了Hadoop分布式文件系统，数据库使用到了ORM框架SQLAlchemy。  
+使用 Python 的 Flask 框架开发的一个校园分享云盘系统，存储使用了 Hadoop 分布式文件系统，数据库使用到了 ORM 框架 SQLAlchemy。 
 
-功能：  
-    用户管理：注册、登录、资料编辑和修改密码。使用邀请码机制来管控新用户注册，防止上传文件的内容违规。
-    文件管理：文件上传下载、文件公开分享和密码分享、删除文件、恢复文件和重命名文件  
-    管理员后台：查看用户个人信息、锁定普通用户、修改用户密码  
-    公共分享文件论坛：可以看到最新最热的公共分享资源
+参考项目：https://github.com/seeicb/Flask-Disk
+
+主要特性：
+    文件操作：上传、下载、重命名、密钥分享、无密钥共享、取消分享、删除、恢复、彻底删除
+    用户操作：注册、登陆、编辑资料、修改密码
+    管理员操作：查看所有用户个人信息，锁定/解锁用户账号，修改用户账号密码
+    邀请码注册：每个用户初始分配一个随机邀请码，用于邀请其他用户注册，有3次有效使用机会
+    用户积分制：上传文件增加用户积分，无密钥共享的文件被下载也会增加用户积分（积分用途待后续开发）
+    文件基本分类：根据扩展名进行判别，展示时可按文件名、修改日期、大小、下载次数排序
+    热门分享：可以看到所有用户无密钥共享的内容，实现真正意义上的共享（未共享资源属于个人资源，他人不可见）
+
 
 ## 安装使用
 ### Hadoop安装配置
-首先需要安装Hadoop环境，参考http://www.powerxing.com/install-hadoop/  
-启用Hadoop回收站，修改conf/core-site.xml和hdfs-site.xml
+首先需要安装 Hadoop 环境，参考http://www.powerxing.com/install-hadoop/  
+启用 Hadoop 回收站，修改 conf/core-site.xml 和 hdfs-site.xml
 
-真分布式hdfs的搭建主要注意
-    1. 主机名的修改，要与hdfs中节点hosts文件的名字相同
-    2. namenode的webhdfs端口从50070转成9870
-    3. core-site中使用ip地址而不是0.0.0.0，并在hdfs-site.xml中添加与namenode的rpc通信的配置项目
+真分布式 hdfs 的搭建要注意：
+    1. 主机名的修改，要与 hdfs 中节点 hosts 文件的名字相同
+    2. namenode 的 webhdfs 端口从 50070 转成 9870 
+    3. core-site 中使用 ip 地址而不是 0.0.0.0，并在 hdfs-site.xml 中添加与 namenode 的 rpc 通信的配置项目
+    4. 注意端口的安全组和防火墙设置
 
 
 
@@ -37,8 +44,8 @@ pip install -r requirements.txt
 配置文件config.py，其中
 
 ```
-# 最大上传限制，默认1024M
-MAX_CONTENT_LENGTH = 1024 * 1024 * 1024
+# 最大上传限制，默认128M
+MAX_CONTENT_LENGTH = 1024 * 1024 * 128
 # Cookie 过期时间
 REMEMBER_COOKIE_DURATION = timedelta(days=7)
 # HDFS回收站文件路径
