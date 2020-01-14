@@ -85,4 +85,4 @@ python manage.py deploy
 
 打开：http://114.115.167.187:8082/
 
-默认用户名admin，密码 password（管理员账户）
+默认用户名admin，密码 I won't tell you（管理员账户）
