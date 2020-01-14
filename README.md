@@ -29,6 +29,7 @@
 ## 安装使用
 ### Hadoop安装配置
 首先需要安装 Hadoop 环境，参考http://www.powerxing.com/install-hadoop/  
+
 启用 Hadoop 回收站，修改 conf/core-site.xml 和 hdfs-site.xml
 
 真分布式 hdfs 的搭建要注意：
