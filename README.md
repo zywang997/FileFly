@@ -32,9 +32,13 @@
 启用 Hadoop 回收站，修改 conf/core-site.xml 和 hdfs-site.xml
 
 真分布式 hdfs 的搭建要注意：
+
     1. 主机名的修改，要与 hdfs 中节点 hosts 文件的名字相同
+    
     2. namenode 的 webhdfs 端口从 50070 转成 9870 
+    
     3. core-site 中使用 ip 地址而不是 0.0.0.0，并在 hdfs-site.xml 中添加与 namenode 的 rpc 通信的配置项目
+    
     4. 注意端口的安全组和防火墙设置
 
 
